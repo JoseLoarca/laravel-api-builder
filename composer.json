@@ -1,21 +1,33 @@
 {
-    "name": "joseloarca/laravel-api-builder",
-    "description": "A Laravel package to build APIs from scratch",
-    "type": "library",
-    "require": {
-        "barryvdh/laravel-cors": "^0.11.3",
-        "spatie/laravel-fractal": "^5.4",
-        "spatie/laravel-http-logger": "^1.1"
-    },
-    "authors": [
-        {
-            "name": "José Loarca",
-            "email": "joseloarca97@icloud.com"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "JoseLoarca\\LaravelApiBuilder\\": "src/"
-        }
+  "name": "joseloarca/laravel-api-builder",
+  "description": "A Laravel package to build APIs from scratch",
+  "type": "library",
+  "homepage": "https://github.com/JoseLoarca/laravel-api-builder",
+  "require": {
+    "illuminate/support": "~5.8.0",
+    "illuminate/console": "~5.8.0",
+    "illuminate/filesystem": "~5.8.0",
+    "illuminate/database": "~5.8.0",
+    "illuminate/http": "~5.8.0",
+    "barryvdh/laravel-cors": "^0.11.3",
+    "spatie/laravel-fractal": "^5.4"
+  },
+  "authors": [
+    {
+      "name": "José Loarca",
+      "email": "joseloarca97@icloud.com"
     }
+  ],
+  "autoload": {
+    "psr-4": {
+      "JoseLoarca\\LaravelApiBuilder\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "JoseLoarca\\LaravelApiBuilder\\LaravelApiBuilderServiceProvider"
+      ]
+    }
+  }
 }
