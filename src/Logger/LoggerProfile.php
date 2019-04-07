@@ -1,6 +1,5 @@
 <?php
 
-
 namespace JoseLoarca\LaravelApiBuilder\Logger;
 
 use Illuminate\Http\Request;

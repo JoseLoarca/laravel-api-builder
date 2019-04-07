@@ -16,7 +16,7 @@ return [
      * Methods that should be logged
      */
     'should_log' => [
-        'get', 'post', 'put', 'patch', 'delete'
+        'get', 'post', 'put', 'patch', 'delete',
     ],
 
     /*
