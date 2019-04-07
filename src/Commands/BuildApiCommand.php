@@ -1,6 +1,5 @@
 <?php
 
-
 namespace JoseLoarca\LaravelApiBuilder\Commands;
 
 use Illuminate\Console\Command;
@@ -40,7 +39,7 @@ class BuildApiCommand extends Command
     /**
      * Create a new command instance.
      *
-     * @param  Filesystem  $filesystem
+     * @param Filesystem $filesystem
      *
      * @return void
      */
@@ -59,7 +58,7 @@ class BuildApiCommand extends Command
     public function handle()
     {
         $this->progressBar = $this->output->createProgressBar(3);
-        $this->progressBar->setFormat("[%bar%] %percent:3s%% -- %message%");
+        $this->progressBar->setFormat('[%bar%] %percent:3s%% -- %message%');
         $this->info('Building API...');
 
         //Retrieve --translations option
@@ -78,7 +77,6 @@ class BuildApiCommand extends Command
 
         $this->progressBar->setMessage('Done');
         $this->progressBar->advance();
-
     }
 
     /**
@@ -89,7 +87,7 @@ class BuildApiCommand extends Command
     protected function publishTranslations()
     {
         Artisan::call('vendor:publish', [
-            '--provider' => 'JoseLoarca\LaravelApiBuilder\LaravelApiBuilderServiceProvider', '--tag' => 'lang'
+            '--provider' => 'JoseLoarca\LaravelApiBuilder\LaravelApiBuilderServiceProvider', '--tag' => 'lang',
         ]);
 
         $this->progressBar->setMessage('Publishing translations...');
@@ -97,14 +95,14 @@ class BuildApiCommand extends Command
     }
 
     /**
-     * Publish Requests Logger configuration file
+     * Publish Requests Logger configuration file.
      *
      * @return void
      */
     protected function publishLoggerConfig()
     {
         Artisan::call('vendor:publish', [
-            '--provider' => 'JoseLoarca\LaravelApiBuilder\LaravelApiBuilderServiceProvider', '--tag' => 'config'
+            '--provider' => 'JoseLoarca\LaravelApiBuilder\LaravelApiBuilderServiceProvider', '--tag' => 'config',
         ]);
 
         $this->progressBar->setMessage('Publishing configuration files...');
@@ -118,6 +116,5 @@ class BuildApiCommand extends Command
      */
     protected function publishApiHandler()
     {
-
     }
 }

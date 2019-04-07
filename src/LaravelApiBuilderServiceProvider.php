@@ -43,10 +43,10 @@ class LaravelApiBuilderServiceProvider extends ServiceProvider
 
         $this->registerMiddleware(RequestsLogger::class);
     }
-    
+
     /**
-     * Register the requests logger middleware
-     * 
+     * Register the requests logger middleware.
+     *
      * @return void
      */
     protected function registerMiddleware($middleware)
