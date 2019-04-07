@@ -1,6 +1,5 @@
 <?php
 
-
 namespace JoseLoarca\LaravelApiBuilder\Middleware;
 
 use Closure;
@@ -14,6 +13,5 @@ class RequestsLogger
 
     public function handle(Request $request, Closure $closure)
     {
-
     }
 }

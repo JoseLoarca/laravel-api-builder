@@ -1,6 +1,5 @@
 <?php
 
-
 namespace JoseLoarca\LaravelApiBuilder\Http\Controllers;
 
 use App\Http\Controllers\Controller;

@@ -4,22 +4,21 @@
  * This class handles API responses.
  *
  * @author José Loarca <joseloarca97@icloud.com>
- *
  */
 
 namespace JoseLoarca\LaravelApiBuilder\Traits;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
-use Illuminate\Database\Eloquent\Model;
 
 trait ApiHandler
 {
     /**
-     * Return an error response
+     * Return an error response.
      *
-     * @param  string  $message  Error message
-     * @param  int  $code  HTTP Code
+     * @param string $message Error message
+     * @param int    $code    HTTP Code
      *
      * @return Response
      */
@@ -29,10 +28,10 @@ trait ApiHandler
     }
 
     /**
-     * Return a response for a show all request
+     * Return a response for a show all request.
      *
-     * @param  Collection  $collection  Collection to be returned
-     * @param  int  $code  HTTP Code
+     * @param Collection $collection Collection to be returned
+     * @param int        $code       HTTP Code
      *
      * @return Response
      */
@@ -43,14 +42,15 @@ trait ApiHandler
         }
         $transformer = $collection->first()->transformer;
         $collection = $this->transformData($collection, $transformer);
+
         return $this->successResponse($collection, $code);
     }
 
     /**
-     * Return a successful response
+     * Return a successful response.
      *
-     * @param  mixed  $data  Request data
-     * @param  int  $code  HTTP Code
+     * @param mixed $data Request data
+     * @param int   $code HTTP Code
      *
      * @return Response
      */
@@ -60,7 +60,7 @@ trait ApiHandler
     }
 
     /**
-     * Transform request response
+     * Transform request response.
      *
      * @param $data
      * @param $transformer
@@ -69,15 +69,16 @@ trait ApiHandler
      */
     protected function transformData($data, $transformer)
     {
-        $transformation = fractal($data, new $transformer);
+        $transformation = fractal($data, new $transformer());
+
         return $transformation->toArray();
     }
 
     /**
-     * Return a response for a show one request
+     * Return a response for a show one request.
      *
-     * @param  Model  $instance  Model instance to be returned
-     * @param  int  $code  HTTP Code
+     * @param Model $instance Model instance to be returned
+     * @param int   $code     HTTP Code
      *
      * @return Response
      */
@@ -85,14 +86,15 @@ trait ApiHandler
     {
         $transformer = $instance->transformer;
         $instance = $this->transformData($instance, $transformer);
+
         return $this->successResponse($instance, $code);
     }
 
     /**
-     * Return a successful message
+     * Return a successful message.
      *
-     * @param  mixed  $message  Message
-     * @param  int  $code  HTTP Code
+     * @param mixed $message Message
+     * @param int   $code    HTTP Code
      *
      * @return Response
      */
