@@ -2,6 +2,7 @@
 
 namespace JoseLoarca\LaravelApiBuilder;
 
+use Barryvdh\Cors\HandleCors;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Support\ServiceProvider;
 use JoseLoarca\LaravelApiBuilder\Middleware\RequestsLogger;
@@ -41,11 +42,14 @@ class LaravelApiBuilderServiceProvider extends ServiceProvider
             ], 'config');
         }
 
+        $this->registerMiddlewareToGroup(HandleCors::class, 'api');
         $this->registerMiddleware(RequestsLogger::class);
     }
 
     /**
-     * Register the requests logger middleware.
+     * Add a new middleware to end of the stack if it does not already exist.
+     *
+     * @param $middleware
      *
      * @return void
      */
@@ -54,5 +58,20 @@ class LaravelApiBuilderServiceProvider extends ServiceProvider
         $kernel = $this->app[Kernel::class];
 
         $kernel->pushMiddleware($middleware);
+    }
+
+    /**
+     * Add a middleware to the end of a middleware group.
+     *
+     * @param $middleware
+     * @param  string  $group
+     *
+     * @return void
+     */
+    protected function registerMiddlewareToGroup($middleware, string $group)
+    {
+        $router = $this->app['router'];
+
+        $router->pushMiddlewareToGroup($group, $middleware);
     }
 }
