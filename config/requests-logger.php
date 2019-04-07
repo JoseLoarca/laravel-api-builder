@@ -13,6 +13,13 @@ return [
     'log_files' => false,
 
     /*
+     * Methods that should be logged
+     */
+    'should_log' => [
+        'get', 'post', 'put', 'patch', 'delete'
+    ],
+
+    /*
      * Body fields that should never be logged
      */
     'except' => [
