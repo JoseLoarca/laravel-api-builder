@@ -1,4 +1,5 @@
 <?php
+
 return [
     /*
     |--------------------------------------------------------------------------
@@ -10,6 +11,6 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-    'failed' => 'Estas credenciales no coinciden con nuestros registros.',
+    'failed'   => 'Estas credenciales no coinciden con nuestros registros.',
     'throttle' => 'Demasiados intentos fallidos en muy poco tiempo. Por favor intente de nuevo en :seconds segundos.',
 ];
