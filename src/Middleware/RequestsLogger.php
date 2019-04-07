@@ -38,7 +38,6 @@ class RequestsLogger
     public function handle(Request $request, Closure $closure)
     {
         if (config('requests-logger.enabled')) {
-
             if ($this->loggerProfile->shouldLogRequest($request)) {
                 $this->logWriter->logRequest($request);
             }
