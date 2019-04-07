@@ -21,7 +21,7 @@ class LogWriter
                 return $file->getClientOriginalName();
             }, iterator_to_array($request->files));
 
-            $message .= " - Files: " .implode(', ', $files);
+            $message .= ' - Files: '.implode(', ', $files);
         }
 
         Log::info($message);

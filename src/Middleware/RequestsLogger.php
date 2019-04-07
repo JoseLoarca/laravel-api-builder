@@ -10,14 +10,14 @@ use JoseLoarca\LaravelApiBuilder\Logger\LogWriter;
 class RequestsLogger
 {
     /**
-     * LoggerProfile instance
+     * LoggerProfile instance.
      *
      * @var LoggerProfile
      */
     protected $loggerProfile;
 
     /**
-     * LogWriter instance
+     * LogWriter instance.
      *
      * @var LogWriter
      */
@@ -26,8 +26,8 @@ class RequestsLogger
     /**
      * RequestsLogger constructor.
      *
-     * @param  LoggerProfile  $loggerProfile
-     * @param  LogWriter  $logWriter
+     * @param LoggerProfile $loggerProfile
+     * @param LogWriter     $logWriter
      */
     public function __construct(LoggerProfile $loggerProfile, LogWriter $logWriter)
     {
