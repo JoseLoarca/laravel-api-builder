@@ -57,7 +57,7 @@ class BuildApiCommand extends Command
      */
     public function handle()
     {
-        $this->progressBar = $this->output->createProgressBar(3);
+        $this->progressBar = $this->output->createProgressBar(4);
         $this->progressBar->setFormat('[%bar%] %percent:3s%% -- %message%');
         $this->info('Building API...');
 
@@ -116,5 +116,8 @@ class BuildApiCommand extends Command
      */
     protected function publishApiHandler()
     {
+        $this->progressBar->setMessage('Publishing API handler...');
+        $this->progressBar->advance();
     }
+
 }
