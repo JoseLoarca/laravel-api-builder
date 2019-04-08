@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Transformers;
+
+use App\MODEL_CLASS;
+use League\Fractal\TransformerAbstract;
+
+class MODEL_CLASSTransformer extends TransformerAbstract
+{
+    /**
+     * A Fractal transformer.
+     *
+     * @param MODEL_CLASS $MODEL_CLASS_VAR
+     *
+     * @return array
+     */
+    public function transform(MODEL_CLASS $MODEL_CLASS_VAR)
+    {
+        return TRANSFORMABLE_ATTRIBUTES;
+    }
+}

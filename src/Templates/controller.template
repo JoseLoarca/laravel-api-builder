@@ -1,0 +1,66 @@
+<?php
+
+namespace App\Http\Controllers\MODEL_CLASS;
+
+use App\MODEL_CLASS;
+use Illuminate\Http\Request;
+use App\Http\Controllers\ApiController;
+
+class MODEL_CLASSController extends ApiController
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return $this->showAll(MODEL_CLASS::all());
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+       //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\MODEL_CLASS  $MODEL_CLASS_VAR
+     * @return \Illuminate\Http\Response
+     */
+    public function show(MODEL_CLASS $MODEL_CLASS_VAR)
+    {
+        return $this->showOne($MODEL_CLASS_VAR);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\MODEL_CLASS  $MODEL_CLASS_VAR
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, MODEL_CLASS $MODEL_CLASS_VAR)
+    {
+        //
+    }
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\MODEL_CLASS $MODEL_CLASS_VAR
+     * @return \Illuminate\Http\Response
+     *
+     * @throws \Exception
+     */
+    public function destroy(MODEL_CLASS $MODEL_CLASS_VAR)
+    {
+        //
+    }
+}

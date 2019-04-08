@@ -1,0 +1,54 @@
+<?php
+
+namespace App;
+
+use App\Transformers\MODEL_NAMETransformer;
+use Illuminate\Database\Eloquent\Model;
+SOFT_DELETE_IMPORT
+
+class MODEL_NAME extends Model
+{
+    SOFT_DELETES
+
+    /**
+     * Transformer associated with the model
+     *
+     * @var MODEL_NAMETransformer
+     */
+    public $transformer = MODEL_NAMETransformer::class;
+
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'TABLE_NAME';
+
+    /**
+     * The table primary key.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'TABLE_NAME_id';
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = SOFT_DELETE_CAST;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = FILLABLE_ATTRIBUTES;
+
+     /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = HIDDEN_ATTRIBUTES;
+}
