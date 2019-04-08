@@ -119,5 +119,4 @@ class BuildApiCommand extends Command
         $this->progressBar->setMessage('Publishing API handler...');
         $this->progressBar->advance();
     }
-
 }

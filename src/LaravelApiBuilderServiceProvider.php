@@ -65,8 +65,7 @@ class LaravelApiBuilderServiceProvider extends ServiceProvider
      * Add a new middleware to end of the stack if it does not already exist.
      *
      * @param $middleware
-     *
-     * @param  string  $group
+     * @param string $group
      *
      * @return void
      */

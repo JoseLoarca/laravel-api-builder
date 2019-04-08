@@ -11,7 +11,6 @@
 
 namespace JoseLoarca\LaravelApiBuilder\Stack;
 
-use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -19,22 +18,22 @@ class CorsService
 {
     private $options;
 
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
         $this->options = $this->normalizeOptions($options);
     }
 
-    private function normalizeOptions(array $options = array())
+    private function normalizeOptions(array $options = [])
     {
-        $options += array(
-            'allowedOrigins' => array(),
-            'allowedOriginsPatterns' => array(),
-            'supportsCredentials' => false,
-            'allowedHeaders' => array(),
-            'exposedHeaders' => array(),
-            'allowedMethods' => array(),
-            'maxAge' => 0,
-        );
+        $options += [
+            'allowedOrigins'         => [],
+            'allowedOriginsPatterns' => [],
+            'supportsCredentials'    => false,
+            'allowedHeaders'         => [],
+            'exposedHeaders'         => [],
+            'allowedMethods'         => [],
+            'maxAge'                 => 0,
+        ];
 
         // normalize array('*') to true
         if (in_array('*', $options['allowedOrigins'])) {
@@ -83,7 +82,7 @@ class CorsService
         if (!$response->headers->has('Vary')) {
             $response->headers->set('Vary', 'Origin');
         } else {
-            $response->headers->set('Vary', $response->headers->get('Vary') . ', Origin');
+            $response->headers->set('Vary', $response->headers->get('Vary').', Origin');
         }
 
         if ($this->options['supportsCredentials']) {
@@ -143,10 +142,10 @@ class CorsService
             return $this->createBadRequestResponse(405, 'Method not allowed');
         }
 
-        $requestHeaders = array();
+        $requestHeaders = [];
         // if allowedHeaders has been set to true ('*' allow all flag) just skip this check
         if ($this->options['allowedHeaders'] !== true && $request->headers->has('Access-Control-Request-Headers')) {
-            $headers        = strtolower($request->headers->get('Access-Control-Request-Headers'));
+            $headers = strtolower($request->headers->get('Access-Control-Request-Headers'));
             $requestHeaders = array_filter(explode(',', $headers));
 
             foreach ($requestHeaders as $header) {
@@ -198,6 +197,7 @@ class CorsService
         }
 
         $requestMethod = strtoupper($request->headers->get('Access-Control-Request-Method'));
+
         return in_array($requestMethod, $this->options['allowedMethods']);
     }
 }

@@ -1,12 +1,14 @@
-<?php namespace JoseLoarca\LaravelApiBuilder\Middleware;
+<?php
+
+namespace JoseLoarca\LaravelApiBuilder\Middleware;
 
 use Closure;
-use Illuminate\Http\Request;
 use Illuminate\Contracts\Events\Dispatcher;
-use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Http\Response as LaravelResponse;
 use Illuminate\Foundation\Http\Events\RequestHandled;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response as LaravelResponse;
 use JoseLoarca\LaravelApiBuilder\Stack\CorsService;
+use Symfony\Component\HttpFoundation\Response;
 
 class HandleCors
 {
@@ -23,17 +25,18 @@ class HandleCors
     }
 
     /**
-     * Handle an incoming request. Based on Asm89\Stack\Cors by asm89
+     * Handle an incoming request. Based on Asm89\Stack\Cors by asm89.
+     *
      * @see https://github.com/asm89/stack-cors/blob/master/src/Asm89/Stack/Cors.php
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
+     *
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
-
-        if (! $this->cors->isCorsRequest($request)) {
+        if (!$this->cors->isCorsRequest($request)) {
             return $next($request);
         }
 
@@ -41,7 +44,7 @@ class HandleCors
             return $this->cors->handlePreflightRequest($request);
         }
 
-        if (! $this->cors->isActualRequestAllowed($request)) {
+        if (!$this->cors->isActualRequestAllowed($request)) {
             return new LaravelResponse('Not allowed in CORS policy.', 403);
         }
 
@@ -62,14 +65,15 @@ class HandleCors
     }
 
     /**
-     * @param Request $request
+     * @param Request  $request
      * @param Response $response
+     *
      * @return Response
      */
     protected function addHeaders(Request $request, Response $response)
     {
         // Prevent double checking
-        if (! $response->headers->has('Access-Control-Allow-Origin')) {
+        if (!$response->headers->has('Access-Control-Allow-Origin')) {
             $response = $this->cors->addActualRequestHeaders($response, $request);
         }
 
