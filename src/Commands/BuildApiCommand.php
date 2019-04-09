@@ -57,8 +57,9 @@ class BuildApiCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return mixed
      * @throws FileNotFoundException
+     *
+     * @return mixed
      */
     public function handle()
     {
@@ -95,10 +96,10 @@ class BuildApiCommand extends Command
     }
 
     /**
-     * Check the model input and build an array associating model with attributes
+     * Check the model input and build an array associating model with attributes.
      *
-     * @param  array  $models
-     * @param  array  $attributes
+     * @param array $models
+     * @param array $attributes
      *
      * @return array|false
      */
@@ -121,16 +122,17 @@ class BuildApiCommand extends Command
     }
 
     /**
-     * Generate models
+     * Generate models.
      *
-     * @param  array  $modelsData
+     * @param array $modelsData
+     *
+     * @throws FileNotFoundException
      *
      * @return void
-     * @throws FileNotFoundException
      */
     public function handleModelGeneration(array $modelsData)
     {
-        foreach ($modelsData AS $model) {
+        foreach ($modelsData as $model) {
 
             //Model and filename name
             $modelName = Str::studly($model['model']);
@@ -154,7 +156,6 @@ class BuildApiCommand extends Command
             $this->handleControllerGeneration($modelName);
 
             $this->info($modelName);
-
         }
     }
 
@@ -189,26 +190,26 @@ class BuildApiCommand extends Command
     }
 
     /**
-     * Publish the API Controller
+     * Publish the API Controller.
      *
      * @return void
      */
     protected function publishApiController()
     {
-        $this->filesystem->copy(__DIR__. './../Http/Controllers/ApiController.php', app_path('Http/Controllers/ApiController.php'));
+        $this->filesystem->copy(__DIR__.'./../Http/Controllers/ApiController.php', app_path('Http/Controllers/ApiController.php'));
 
         $this->progressBar->setMessage('Publishing API controller...');
         $this->progressBar->advance();
     }
 
     /**
-     * Generate controllers and routes
+     * Generate controllers and routes.
      *
      * @param string $modelName
      *
-     * @return void
-     *
      * @throws FileNotFoundException
+     *
+     * @return void
      */
     public function handleControllerGeneration(string $modelName)
     {
@@ -223,7 +224,7 @@ class BuildApiCommand extends Command
         $controllerStub = str_replace('MODEL_VAR', Str::camel($modelName), $controllerStub);
 
         //Create directory if its missing
-        if ( ! $this->filesystem->exists(app_path("Http/Controllers/{$modelName}"))) {
+        if (!$this->filesystem->exists(app_path("Http/Controllers/{$modelName}"))) {
             $this->filesystem->makeDirectory(app_path("Http/Controllers/{$modelName}"));
         }
 
@@ -246,12 +247,13 @@ class BuildApiCommand extends Command
     }
 
     /**
-     * Generate transformers
+     * Generate transformers.
      *
-     * @param  string  $modelName
+     * @param string $modelName
+     *
+     * @throws FileNotFoundException
      *
      * @return void
-     * @throws FileNotFoundException
      */
     protected function handleTransformerGeneration(string $modelName)
     {
@@ -266,7 +268,7 @@ class BuildApiCommand extends Command
         $transformerStub = str_replace('TRANSFORMABLE_ATTRIBUTES', $transformableAttributes, $transformerStub);
 
         //Create Transformers directory if its missing
-        if ( ! $this->filesystem->exists(app_path('Transformers'))) {
+        if (!$this->filesystem->exists(app_path('Transformers'))) {
             $this->filesystem->makeDirectory(app_path('Transformers'));
         }
 
@@ -275,27 +277,28 @@ class BuildApiCommand extends Command
     }
 
     /**
-     * Publish exception handler file
+     * Publish exception handler file.
      *
      * @void
+     *
      * @throws FileNotFoundException
      */
     protected function publishExceptionHandler()
     {
-        $this->filesystem->put(app_path('Exceptions/Handler.php'), $this->filesystem->get(__DIR__ . './../Exceptions/Handler.php'));
+        $this->filesystem->put(app_path('Exceptions/Handler.php'), $this->filesystem->get(__DIR__.'./../Exceptions/Handler.php'));
     }
 
     /**
-     * Get the stub file
+     * Get the stub file.
      *
-     * @param  string  $stubType
-     *
-     * @return string
+     * @param string $stubType
      *
      * @throws FileNotFoundException
+     *
+     * @return string
      */
     protected function getStub(string $stubType)
     {
-        return $this->filesystem->get(__DIR__ . "/../stubs/{$stubType}.stub");
+        return $this->filesystem->get(__DIR__."/../stubs/{$stubType}.stub");
     }
 }
