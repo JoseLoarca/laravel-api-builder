@@ -44,10 +44,11 @@ class Handler extends ExceptionHandler
      *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param  Exception  $exception
+     * @param Exception $exception
+     *
+     * @throws Exception
      *
      * @return void
-     * @throws Exception
      */
     public function report(Exception $exception)
     {
@@ -57,8 +58,8 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  Request  $request
-     * @param  Exception  $exception
+     * @param Request   $request
+     * @param Exception $exception
      *
      * @return Response
      */
@@ -66,14 +67,15 @@ class Handler extends ExceptionHandler
     {
         $response = $this->handleException($request, $exception);
         app(CorsService::class)->addActualRequestHeaders($response, $request);
+
         return $response;
     }
 
     /**
-     * Handles different types of exceptions
+     * Handles different types of exceptions.
      *
      * @param $request
-     * @param  Exception  $exception
+     * @param Exception $exception
      *
      * @return Response
      */
@@ -84,6 +86,7 @@ class Handler extends ExceptionHandler
         }
         if ($exception instanceof ModelNotFoundException) {
             $model = class_basename($exception->getModel());
+
             return $this->errorResponse("No query results for {$model} with the specified ID.", 404);
         }
         if ($exception instanceof AuthenticationException) {
@@ -114,14 +117,15 @@ class Handler extends ExceptionHandler
         if (config('app.debug')) {
             return parent::render($request, $exception);
         }
+
         return $this->errorResponse('An unexpected error has occurred. Please try again.', 500);
     }
 
     /**
      * Create a response object from the given validation exception.
      *
-     * @param  ValidationException  $e
-     * @param  Request  $request
+     * @param ValidationException $e
+     * @param Request             $request
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -133,11 +137,12 @@ class Handler extends ExceptionHandler
                 ->withInput($request->input())
                 ->withErrors($errors);
         }
+
         return $this->errorResponse($errors, 422);
     }
 
     /**
-     * Checks if a request comes from web
+     * Checks if a request comes from web.
      *
      * @param $request
      *
@@ -151,8 +156,8 @@ class Handler extends ExceptionHandler
     /**
      * Convert an authentication exception into a response.
      *
-     * @param  Request  $request
-     * @param  AuthenticationException  $exception
+     * @param Request                 $request
+     * @param AuthenticationException $exception
      *
      * @return Response
      */
@@ -161,6 +166,7 @@ class Handler extends ExceptionHandler
         if ($this->isFrontend($request)) {
             return redirect()->guest('login');
         }
+
         return $this->errorResponse('Not authenticated.', 401);
     }
 }
