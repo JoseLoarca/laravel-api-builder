@@ -1,8 +1,7 @@
 <?php
 
-namespace JoseLoarca\LaravelApiBuilder\Http\Controllers;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use JoseLoarca\LaravelApiBuilder\Traits\ApiHandler;
 
 class ApiController extends Controller

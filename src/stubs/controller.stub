@@ -4,6 +4,7 @@ namespace App\Http\Controllers\MODEL_CLASS;
 
 use App\MODEL_CLASS;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Http\Controllers\ApiController;
 
 class MODEL_CLASSController extends ApiController
@@ -11,7 +12,7 @@ class MODEL_CLASSController extends ApiController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -21,8 +22,8 @@ class MODEL_CLASSController extends ApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  Request  $request
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -32,34 +33,35 @@ class MODEL_CLASSController extends ApiController
     /**
      * Display the specified resource.
      *
-     * @param  \App\MODEL_CLASS  $MODEL_CLASS_VAR
-     * @return \Illuminate\Http\Response
+     * @param  MODEL_CLASS  $MODEL_VAR
+     * @return Response
      */
-    public function show(MODEL_CLASS $MODEL_CLASS_VAR)
+    public function show(MODEL_CLASS $MODEL_VAR)
     {
-        return $this->showOne($MODEL_CLASS_VAR);
+        return $this->showOne($MODEL_VAR);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\MODEL_CLASS  $MODEL_CLASS_VAR
-     * @return \Illuminate\Http\Response
+     * @param  Request  $request
+     * @param  MODEL_CLASS  $MODEL_VAR
+     * @return Response
      */
-    public function update(Request $request, MODEL_CLASS $MODEL_CLASS_VAR)
+    public function update(Request $request, MODEL_CLASS $MODEL_VAR)
     {
         //
     }
+
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\MODEL_CLASS $MODEL_CLASS_VAR
-     * @return \Illuminate\Http\Response
+     * @param  MODEL_CLASS $MODEL_VAR
+     * @return Response
      *
      * @throws \Exception
      */
-    public function destroy(MODEL_CLASS $MODEL_CLASS_VAR)
+    public function destroy(MODEL_CLASS $MODEL_VAR)
     {
         //
     }
